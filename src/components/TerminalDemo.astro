@@ -1,0 +1,115 @@
+---
+interface DemoContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  command: string;
+  lines: string[];
+}
+
+interface ReleaseContent {
+  version: string;
+  summary: string;
+  highlights: string[];
+}
+
+interface ArtifactContent {
+  demoTree: string[];
+}
+
+interface Props {
+  content: DemoContent;
+  release: ReleaseContent;
+  artifacts: ArtifactContent;
+}
+
+const { content, release, artifacts } = Astro.props;
+---
+
+<section class="section-shell grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+  <div>
+    <span class="eyebrow">{content.eyebrow}</span>
+    <h2 class="section-title">{content.title}</h2>
+    <p class="section-copy">{content.description}</p>
+
+    <div class="glass-panel mt-8 overflow-hidden rounded-[32px]">
+      <div class="flex items-center justify-between border-b border-border/70 bg-ink/55 px-5 py-4">
+        <div class="flex gap-2">
+          <span class="size-3 rounded-full bg-accent/90"></span>
+          <span class="size-3 rounded-full bg-amber-300/85"></span>
+          <span class="size-3 rounded-full bg-success/80"></span>
+        </div>
+        <div class="font-mono text-xs uppercase tracking-[0.24em] text-muted">dry-run preview</div>
+      </div>
+
+      <div class="px-5 py-5 sm:px-6">
+        <code class="block overflow-x-auto rounded-2xl border border-border/60 bg-surface/75 px-4 py-4 text-sm text-success">
+          $ {content.command}
+        </code>
+
+        <ol class="mt-5 space-y-2 font-mono text-sm leading-7 text-text">
+          {
+            content.lines.map((line) => (
+              <li class="terminal-line rounded-xl border border-transparent px-3 py-1.5">{line}</li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <aside class="space-y-5">
+    <article class="glass-panel rounded-[30px] p-6">
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-success">Latest release</p>
+      <h3 class="mt-3 text-2xl font-black tracking-[-0.04em] text-text">v{release.version}</h3>
+      <p class="mt-4 text-sm leading-7 text-muted">{release.summary}</p>
+      <ul class="mt-5 space-y-3 text-sm leading-7 text-muted">
+        {
+          release.highlights.map((item) => (
+            <li class="rounded-2xl border border-border/70 bg-ink/45 px-4 py-3">{item}</li>
+          ))
+        }
+      </ul>
+    </article>
+
+    <article class="glass-panel rounded-[30px] p-6">
+      <p class="font-mono text-xs uppercase tracking-[0.28em] text-success">Generated tree</p>
+      <ul class="mt-5 space-y-3 font-mono text-sm text-text">
+        {
+          artifacts.demoTree.map((path) => (
+            <li class="rounded-2xl border border-border/70 bg-ink/45 px-4 py-3">{path}</li>
+          ))
+        }
+      </ul>
+    </article>
+  </aside>
+</section>
+
+<style>
+  .terminal-line {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: terminal-line-in 0.55s ease forwards;
+  }
+
+  .terminal-line:nth-child(1) { animation-delay: 0.08s; }
+  .terminal-line:nth-child(2) { animation-delay: 0.16s; }
+  .terminal-line:nth-child(3) { animation-delay: 0.24s; }
+  .terminal-line:nth-child(4) { animation-delay: 0.32s; }
+  .terminal-line:nth-child(5) { animation-delay: 0.4s; }
+  .terminal-line:nth-child(6) { animation-delay: 0.48s; }
+  .terminal-line:nth-child(7) { animation-delay: 0.56s; }
+  .terminal-line:nth-child(8) { animation-delay: 0.64s; }
+  .terminal-line:nth-child(9) { animation-delay: 0.72s; }
+  .terminal-line:nth-child(10) { animation-delay: 0.8s; }
+  .terminal-line:nth-child(11) { animation-delay: 0.88s; }
+  .terminal-line:nth-child(12) { animation-delay: 0.96s; }
+  .terminal-line:nth-child(13) { animation-delay: 1.04s; }
+
+  @keyframes terminal-line-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

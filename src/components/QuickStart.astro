@@ -1,0 +1,38 @@
+---
+interface Content {
+  eyebrow: string;
+  title: string;
+  description: string;
+  language: string;
+  lines: string[];
+}
+
+interface Props {
+  content: Content;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="section-shell">
+  <div class="glass-panel overflow-hidden rounded-[36px]">
+    <div class="grid gap-8 px-6 py-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)] lg:px-8">
+      <div>
+        <span class="eyebrow">{content.eyebrow}</span>
+        <h2 class="section-title max-w-none text-4xl">{content.title}</h2>
+        <p class="section-copy max-w-none">{content.description}</p>
+      </div>
+
+      <div class="rounded-[28px] border border-border/80 bg-ink/65 p-5">
+        <div class="flex items-center justify-between gap-3">
+          <p class="font-mono text-xs uppercase tracking-[0.26em] text-muted">{content.language}</p>
+          <span class="rounded-full border border-success/40 bg-success/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-success">
+            3-step setup
+          </span>
+        </div>
+
+        <pre class="mt-5 overflow-x-auto rounded-[22px] border border-border/70 bg-surface/75 p-5 text-sm leading-8 text-text"><code>{content.lines.join("\n")}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>

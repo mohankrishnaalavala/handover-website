@@ -1,0 +1,43 @@
+---
+interface Step {
+  label: string;
+  title: string;
+  description: string;
+}
+
+interface Content {
+  eyebrow: string;
+  title: string;
+  description: string;
+  steps: Step[];
+}
+
+interface Props {
+  content: Content;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="section-shell">
+  <span class="eyebrow">{content.eyebrow}</span>
+  <h2 class="section-title">{content.title}</h2>
+  <p class="section-copy">{content.description}</p>
+
+  <div class="mt-10 grid gap-5 lg:grid-cols-3">
+    {
+      content.steps.map((step) => (
+        <article class="glass-panel rounded-[30px] px-6 py-6">
+          <div class="flex items-center justify-between gap-4">
+            <span class="font-mono text-sm uppercase tracking-[0.26em] text-success">{step.label}</span>
+            <span class="rounded-full border border-border/80 bg-ink/45 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              Step
+            </span>
+          </div>
+          <h3 class="mt-6 text-2xl font-black tracking-[-0.04em] text-text">{step.title}</h3>
+          <p class="mt-4 text-base leading-8 text-muted">{step.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

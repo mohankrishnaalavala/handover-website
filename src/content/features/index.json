@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "title": "Universal knowledge base",
+      "description": "Every run creates a vendor-neutral .handover directory with architecture, decisions, constraints, tasks, milestones, prompts, and codebase indexing."
+    },
+    {
+      "title": "Agent-specific output",
+      "description": "The same extracted context is rendered into the file layout expected by Claude Code, Codex, Copilot, Aider, Goose, or all targets at once."
+    },
+    {
+      "title": "Incremental updates",
+      "description": "Follow-up chats can be merged into an existing handoff without wiping completed tasks or manual edits."
+    },
+    {
+      "title": "Multiple source formats",
+      "description": "Claude, ChatGPT, Gemini, and Perplexity exports all normalize into the same project context model."
+    },
+    {
+      "title": "CLI-first workflow",
+      "description": "Use dry-run previews, grouped conversation listing, merge-by-project, browser-extension capture, and MCP tooling from one open-source package."
+    }
+  ]
+}

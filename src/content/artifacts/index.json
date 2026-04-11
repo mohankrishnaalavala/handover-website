@@ -1,0 +1,68 @@
+{
+  "demoTree": [
+    ".handover/manifest.yaml",
+    ".handover/context/overview.md",
+    ".handover/work/spec.md",
+    ".handover/standards/coding-standards.md",
+    ".claude/agents/frontend-agent.md",
+    ".claude/skills/accessibility-checklist.md",
+    "CLAUDE.md",
+    "PLAN.md"
+  ],
+  "layers": [
+    {
+      "id": "handover",
+      "name": ".handover/",
+      "summary": "The universal layer keeps project knowledge portable across tools: overview, architecture, ADRs, constraints, risks, acceptance criteria, tasks, milestones, prompts, and codebase index files.",
+      "entries": [
+        {
+          "path": "manifest.yaml",
+          "description": "Version, source, target, project name, and generation metadata."
+        },
+        {
+          "path": "context/",
+          "description": "Overview, architecture, decisions, constraints, risks, and acceptance criteria."
+        },
+        {
+          "path": "work/",
+          "description": "Specification, task list, milestones, and machine-readable backlog."
+        },
+        {
+          "path": "standards/",
+          "description": "Coding, testing, security, and release rules that survive across agents."
+        },
+        {
+          "path": "codebase/",
+          "description": "Structure, symbol, and dependency indexes for fast codebase orientation."
+        }
+      ]
+    },
+    {
+      "id": "agent-layer",
+      "name": "Agent-specific layer",
+      "summary": "Each target adapter owns its own filenames and formatting so contributors can open the result in the tool they already use without translation work.",
+      "entries": [
+        {
+          "path": "CLAUDE.md + PLAN.md + .claude/",
+          "description": "Writes a thin CLAUDE.md index, PLAN.md, and the .claude workspace when the two-layer scaffold is enabled."
+        },
+        {
+          "path": "AGENTS.md + TASKS.md",
+          "description": "Generates AGENTS.md and TASKS.md so Codex can pick up the work with project-level context."
+        },
+        {
+          "path": ".aider.conf.yml",
+          "description": "Produces an .aider.conf.yml file with project conventions and the current goal."
+        },
+        {
+          "path": "goose-context.json",
+          "description": "Creates goose-context.json so Block's Goose can ingest structured tasks and constraints."
+        },
+        {
+          "path": ".github/copilot-instructions.md",
+          "description": "Emits the official repository-level .github/copilot-instructions.md context file."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "sources": [
+    {
+      "id": "claude",
+      "name": "Claude",
+      "description": "Bulk JSONL exports, single JSON conversations, and markdown chat captures from Claude.ai.",
+      "exportLabel": "Settings -> Privacy -> Export Data / Claude Conversation Exporter browser extension",
+      "badge": "AI chat"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "description": "JSON exports from ChatGPT data controls, normalized into the same handover context model.",
+      "exportLabel": "Settings -> Data Controls -> Export Data",
+      "badge": "AI chat"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "description": "Gemini activity exports from Google Takeout with format detection handled by the parser registry.",
+      "exportLabel": "Google Takeout -> Gemini Apps Activity",
+      "badge": "AI chat"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "description": "Perplexity account exports converted into structured decisions, tasks, and constraints.",
+      "exportLabel": "Settings -> Account -> Export Data",
+      "badge": "AI chat"
+    }
+  ],
+  "targets": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "description": "Writes a thin CLAUDE.md index, PLAN.md, and the .claude workspace when the two-layer scaffold is enabled.",
+      "badge": "Coding agent",
+      "artifactFiles": [
+        "CLAUDE.md",
+        "PLAN.md",
+        ".claude/"
+      ]
+    },
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "description": "Generates AGENTS.md and TASKS.md so Codex can pick up the work with project-level context.",
+      "badge": "Coding agent",
+      "artifactFiles": [
+        "AGENTS.md",
+        "TASKS.md"
+      ]
+    },
+    {
+      "id": "aider",
+      "name": "Aider",
+      "description": "Produces an .aider.conf.yml file with project conventions and the current goal.",
+      "badge": "Coding agent",
+      "artifactFiles": [
+        ".aider.conf.yml"
+      ]
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "description": "Creates goose-context.json so Block's Goose can ingest structured tasks and constraints.",
+      "badge": "Coding agent",
+      "artifactFiles": [
+        "goose-context.json"
+      ]
+    },
+    {
+      "id": "copilot",
+      "name": "GitHub Copilot",
+      "description": "Emits the official repository-level .github/copilot-instructions.md context file.",
+      "badge": "Coding agent",
+      "artifactFiles": [
+        ".github/copilot-instructions.md"
+      ]
+    }
+  ]
+}

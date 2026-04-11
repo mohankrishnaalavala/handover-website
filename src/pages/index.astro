@@ -1,0 +1,50 @@
+---
+import { getEntry } from "astro:content";
+
+import Footer from "../components/Footer.astro";
+import GeneratedFiles from "../components/GeneratedFiles.astro";
+import Hero from "../components/Hero.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import IntegrationsGrid from "../components/IntegrationsGrid.astro";
+import QuickStart from "../components/QuickStart.astro";
+import TerminalDemo from "../components/TerminalDemo.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const siteEntry = await getEntry("site", "index");
+const integrationsEntry = await getEntry("integrations", "index");
+const releaseEntry = await getEntry("release", "latest");
+const featuresEntry = await getEntry("features", "index");
+const artifactsEntry = await getEntry("artifacts", "index");
+
+if (!siteEntry || !integrationsEntry || !releaseEntry || !featuresEntry || !artifactsEntry) {
+  throw new Error("Missing content entry required to render the landing page.");
+}
+
+const site = siteEntry.data;
+const integrations = integrationsEntry.data;
+const release = releaseEntry.data;
+const features = featuresEntry.data.items;
+const artifacts = artifactsEntry.data;
+---
+
+<BaseLayout title={site.seo.title} description={site.seo.description}>
+  <Hero
+    brandName={site.brand.name}
+    hero={site.hero}
+    release={release}
+    features={features}
+    sources={integrations.sources}
+    targets={integrations.targets}
+  />
+
+  <TerminalDemo content={site.sections.demo} release={release} artifacts={artifacts} />
+  <HowItWorks content={site.sections.howItWorks} />
+  <IntegrationsGrid
+    content={site.sections.integrations}
+    sources={integrations.sources}
+    targets={integrations.targets}
+  />
+  <GeneratedFiles content={site.sections.artifacts} layers={artifacts.layers} />
+  <QuickStart content={site.sections.quickstart} />
+  <Footer brandName={site.brand.name} footer={site.footer} />
+</BaseLayout>

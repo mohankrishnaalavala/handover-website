@@ -1,0 +1,97 @@
+---
+interface IntegrationItem {
+  id: string;
+  name: string;
+  description: string;
+  exportLabel?: string;
+  artifactFiles?: string[];
+  badge: string;
+}
+
+interface Content {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  content: Content;
+  sources: IntegrationItem[];
+  targets: IntegrationItem[];
+}
+
+const { content, sources, targets } = Astro.props;
+---
+
+<section class="section-shell">
+  <span class="eyebrow">{content.eyebrow}</span>
+  <h2 class="section-title">{content.title}</h2>
+  <p class="section-copy">{content.description}</p>
+
+  <div class="mt-10 grid gap-6 xl:grid-cols-2">
+    <article class="glass-panel rounded-[32px] p-6">
+      <div class="flex items-center justify-between gap-4">
+        <h3 class="text-2xl font-black tracking-[-0.04em] text-text">AI chat sources</h3>
+        <span class="rounded-full border border-border/80 bg-ink/45 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          {sources.length} formats
+        </span>
+      </div>
+
+      <div class="mt-6 grid gap-4">
+        {
+          sources.map((source) => (
+            <article class="rounded-[24px] border border-border/80 bg-ink/45 px-5 py-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h4 class="text-xl font-bold tracking-[-0.03em] text-text">{source.name}</h4>
+                  <p class="mt-3 text-sm leading-7 text-muted">{source.description}</p>
+                </div>
+                <span class="rounded-full border border-success/35 bg-success/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-success">
+                  {source.badge}
+                </span>
+              </div>
+              <p class="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-muted">
+                {source.exportLabel}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </article>
+
+    <article class="glass-panel rounded-[32px] p-6">
+      <div class="flex items-center justify-between gap-4">
+        <h3 class="text-2xl font-black tracking-[-0.04em] text-text">Coding agent targets</h3>
+        <span class="rounded-full border border-border/80 bg-ink/45 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          {targets.length} outputs
+        </span>
+      </div>
+
+      <div class="mt-6 grid gap-4">
+        {
+          targets.map((target) => (
+            <article class="rounded-[24px] border border-border/80 bg-ink/45 px-5 py-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h4 class="text-xl font-bold tracking-[-0.03em] text-text">{target.name}</h4>
+                  <p class="mt-3 text-sm leading-7 text-muted">{target.description}</p>
+                </div>
+                <span class="rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-accent">
+                  {target.badge}
+                </span>
+              </div>
+
+              <ul class="mt-4 flex flex-wrap gap-2 font-mono text-xs text-text">
+                {
+                  target.artifactFiles?.map((file) => (
+                    <li class="rounded-full border border-border/80 bg-surface/80 px-3 py-2">{file}</li>
+                  ))
+                }
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </article>
+  </div>
+</section>

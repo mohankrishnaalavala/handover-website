@@ -1,0 +1,65 @@
+name: Sync handover content
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref from the main handover repo to sync
+        required: false
+        default: main
+  schedule:
+    - cron: "0 3 * * *"
+  repository_dispatch:
+    types:
+      - handover-release-sync
+
+permissions:
+  contents: write
+
+jobs:
+  sync-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out website repo
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve source ref
+        id: resolve-ref
+        env:
+          DISPATCH_REF: ${{ github.event.client_payload.ref }}
+          MANUAL_REF: ${{ inputs.ref }}
+        run: |
+          REF="${DISPATCH_REF:-${MANUAL_REF:-main}}"
+          echo "ref=$REF" >> "$GITHUB_OUTPUT"
+
+      - name: Sync structured content
+        run: |
+          pnpm sync:content --repo "https://github.com/mohankrishnaalavala/handover.git" --ref "${{ steps.resolve-ref.outputs.ref }}"
+
+      - name: Commit content updates
+        run: |
+          if git diff --quiet -- src/content; then
+            echo "No content changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content
+          git commit -m "chore: sync website content"
+          git push

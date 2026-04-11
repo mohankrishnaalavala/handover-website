@@ -1,0 +1,114 @@
+{
+  "brand": {
+    "name": "handover",
+    "repoUrl": "https://github.com/mohankrishnaalavala/handover",
+    "pypiUrl": "https://pypi.org/project/handover/",
+    "changelogUrl": "https://github.com/mohankrishnaalavala/handover/blob/main/CHANGELOG.md",
+    "licenseUrl": "https://github.com/mohankrishnaalavala/handover/blob/main/LICENSE"
+  },
+  "seo": {
+    "title": "handover | Universal AI Chat to Coding Agent Handoffs",
+    "description": "Turn exported AI chats into agent-ready project context for Claude Code, Codex, Copilot, Aider, Goose, and more without re-explaining the work."
+  },
+  "hero": {
+    "tagline": "Design in any AI chat. Build with any coding agent. Zero context lost.",
+    "subhead": "handover converts exported AI conversations into durable project context, structured plans, and agent-specific files so implementation can start immediately in the tool you already use.",
+    "installCommand": "pip install handover",
+    "primaryCta": {
+      "label": "View on GitHub",
+      "href": "https://github.com/mohankrishnaalavala/handover"
+    },
+    "secondaryCta": {
+      "label": "Read the changelog",
+      "href": "https://github.com/mohankrishnaalavala/handover/blob/main/CHANGELOG.md"
+    }
+  },
+  "sections": {
+    "demo": {
+      "eyebrow": "Dry-Run Preview",
+      "title": "See the handoff before anything gets written.",
+      "description": "The CLI can preview exactly what it will extract from a chat and which files it will generate, so contributors understand the outcome before they touch a project directory.",
+      "command": "handover --input chat.json --output ./my-project/ --no-llm --dry-run",
+      "lines": [
+        "Parsing: 'API Design Discussion'",
+        "  Source : claude (single-json v1.0)",
+        "  Messages: 34",
+        "Extracted:",
+        "  Goal       : Build a FastAPI REST API with JWT auth and PostgreSQL",
+        "  Tech Stack : Python, FastAPI, PostgreSQL, pytest",
+        "  Decisions  : 2",
+        "  Tasks      : 6",
+        "  Constraints: 2",
+        "  Questions  : 1",
+        "Target: claude-code  |  Would write to ./my-project/:",
+        "  -> CLAUDE.md",
+        "  -> PLAN.md",
+        "Run without --dry-run to write files."
+      ]
+    },
+    "howItWorks": {
+      "eyebrow": "How It Works",
+      "title": "A short path from design chat to working code.",
+      "description": "handover stays focused on the moment teams lose context most often: moving from exploratory chat into a coding session that needs concrete files, constraints, and next steps.",
+      "steps": [
+        {
+          "label": "01",
+          "title": "Export the conversation",
+          "description": "Pull a JSON, JSONL, or markdown chat export from Claude, ChatGPT, Gemini, or Perplexity."
+        },
+        {
+          "label": "02",
+          "title": "Run handover locally",
+          "description": "Generate a universal .handover knowledge base plus the target-specific files your coding agent expects."
+        },
+        {
+          "label": "03",
+          "title": "Open your coding agent",
+          "description": "Start in Claude Code, Codex, Copilot, Aider, Goose, or another target with the work already framed."
+        }
+      ]
+    },
+    "integrations": {
+      "eyebrow": "Supported Integrations",
+      "title": "Every source and target stays on equal footing.",
+      "description": "handover is not a Claude-only wrapper. It reads multiple chat export formats and emits multiple agent-specific outputs from the same extracted context."
+    },
+    "artifacts": {
+      "eyebrow": "Generated Output",
+      "title": "One universal memory layer, plus the exact files each agent expects.",
+      "description": "The generated structure keeps core project understanding portable while still fitting naturally into whichever coding agent a contributor prefers."
+    },
+    "quickstart": {
+      "eyebrow": "Quick Start",
+      "title": "Install it, export a chat, run the handoff.",
+      "description": "The first website release keeps the on-ramp intentionally short so contributors can understand the tool in one screen and try it in one terminal session.",
+      "language": "bash",
+      "lines": [
+        "pip install handover",
+        "# Export a chat as JSON, JSONL, or markdown from your AI tool",
+        "handover --input chat.json --output ./my-project/ --target codex"
+      ]
+    }
+  },
+  "footer": {
+    "blurb": "Static Astro site for the open-source handover CLI, synced from the main project repo and deployed on Cloudflare Pages.",
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/mohankrishnaalavala/handover"
+      },
+      {
+        "label": "PyPI",
+        "href": "https://pypi.org/project/handover/"
+      },
+      {
+        "label": "CHANGELOG",
+        "href": "https://github.com/mohankrishnaalavala/handover/blob/main/CHANGELOG.md"
+      },
+      {
+        "label": "MIT License",
+        "href": "https://github.com/mohankrishnaalavala/handover/blob/main/LICENSE"
+      }
+    ]
+  }
+}
