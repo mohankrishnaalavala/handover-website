@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   sync-content:
@@ -51,15 +52,27 @@ jobs:
         run: |
           pnpm sync:content --repo "https://github.com/mohankrishnaalavala/handover.git" --ref "${{ steps.resolve-ref.outputs.ref }}"
 
-      - name: Commit content updates
+      - name: Create and merge sync PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if git diff --quiet -- src/content; then
             echo "No content changes detected."
             exit 0
           fi
 
+          BRANCH="automation/sync-content-${{ github.run_id }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add src/content
           git commit -m "chore: sync website content"
-          git push
+          git push --set-upstream origin "$BRANCH"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: sync website content" \
+            --body "Automated content refresh from the main handover repository."
+
+          gh pr merge "$BRANCH" --squash --delete-branch
