@@ -1,11 +1,11 @@
 {
-  "version": "1.2.0",
-  "date": "2026-04-11",
-  "summary": "Two new capabilities that close the loop on iterative handover workflows:",
+  "version": "1.2.1",
+  "date": "2026-04-12",
+  "summary": "New handover sync --project <dir> subcommand closes the reverse gap for coding agents that do not write Claude Code session JSONL (Codex VS Code extension, Cursor, Continue, etc.).",
   "highlights": [
-    "Parses existing .handover/ markdown files back into structured data",
-    "Computes an UpdateDelta — new tasks, decisions, constraints, tech stack",
-    "Preserves [x] marks on tasks and done: true on backlog items."
+    "Correlates tasks in .handover/work/backlog.json against the codebase",
+    "Marks tasks done: true + stamps done_at when evidence indicates",
+    "LLM mode (default): one Claude API call returns {task_id: bool}."
   ],
   "changelogUrl": "https://github.com/mohankrishnaalavala/handover/blob/main/CHANGELOG.md"
 }
